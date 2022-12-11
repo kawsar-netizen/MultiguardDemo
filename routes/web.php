@@ -26,6 +26,7 @@ Route::prefix('user')->name('user.')->group(function(){
     Route::middleware(['guest'])->group(function(){
         Route::view('/login','deshboard.users.login')->name('login');
         Route::view('/register','deshboard.users.register')->name('register');
+        Route::post('/register',[UserController::class,'RegisterCreate'])->name('register');
     });
 
     Route::middleware(['auth'])->group(function(){
