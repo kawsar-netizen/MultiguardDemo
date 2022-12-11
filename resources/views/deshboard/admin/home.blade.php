@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard | User</title>
+    <title>Dashboard | Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -45,11 +45,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ Auth::guard('web')->user()->name }}</td>
-                            <td>{{ Auth::guard('web')->user()->email }}</td>
-                            <td><a href="{{ route('user.logout') }}"
+                            <td>{{ Auth::guard('admin')->user()->name }}</td>
+                            <td>{{ Auth::guard('admin')->user()->email }}</td>
+                            <td><a href="{{ route('admin.logout') }}"
                                     onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST">
                                     @csrf
                                 </form>
                             </td>

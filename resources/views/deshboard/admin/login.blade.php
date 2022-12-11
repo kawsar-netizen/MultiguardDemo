@@ -14,7 +14,7 @@
 
     <div class="container">
         <div class="row">
-            <h3 style="margin-top: 30px;">User Login</h3>
+            <h3 style="margin-top: 30px;">Admin Login</h3>
             <div class="col-md-5">
                 {{-- laravel alert start --}}
                 {{-- @if (session()->has('success'))
@@ -42,7 +42,7 @@
                 @endif
                 {{-- script alert end --}}
 
-                <form action="{{ route('user.doLogin') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                <form action="{{ route('admin.doLogin') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -65,7 +65,6 @@
                         </span>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    New user <a href="{{route('user.register')}}">Registration Here</a>
                 </form>
             </div>
         </div>

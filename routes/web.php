@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
@@ -22,16 +23,29 @@ Route::get('/', function () {
 Auth::routes();
 
 // All user routes here
-Route::prefix('user')->name('user.')->group(function(){
-    Route::middleware(['guest'])->group(function(){
-        Route::view('/login','deshboard.users.login')->name('login');
-        Route::view('/register','deshboard.users.register')->name('register');
-        Route::post('/register',[UserController::class,'RegisterCreate'])->name('register');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('user')->name('user.')->group(function () {
+    Route::middleware(['guest:web'])->group(function () {
+        Route::view('/login', 'deshboard.users.login')->name('login');
+        Route::post('/login', [UserController::class, 'doLogin'])->name('doLogin');
+        Route::view('/register', 'deshboard.users.register')->name('register');
+        Route::post('/register', [UserController::class, 'RegisterCreate'])->name('RegisterCreate');
     });
 
-    Route::middleware(['auth'])->group(function(){
-        Route::view('/home','deshboard.users.home')->name('home');
+    Route::middleware(['auth:web'])->group(function () {
+        Route::view('/home', 'deshboard.users.home')->name('home');
+        Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     });
 });
+// All admin routes here
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['guest:admin'])->group(function () {
+        Route::view('/login', 'deshboard.admin.login')->name('login');
+        Route::post('/login', [AdminController::class, 'doLogin'])->name('doLogin');
+    });
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::middleware(['auth:admin'])->group(function () {
+        Route::view('/home', 'deshboard.admin.home')->name('home');
+        Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    });
+});
