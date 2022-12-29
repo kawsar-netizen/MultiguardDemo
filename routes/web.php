@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\BackupTableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     });
 });
+
+//Database Table Backup route here..
+Route::get('/tablebackup',[BackupTableController::class,'TableBackup']);
